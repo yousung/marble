@@ -1,9 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:mable/controller/login_controller.dart';
+import 'package:mable/view/login_view.dart';
 import 'package:mable/view/map_view.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  await GetStorage.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,8 +23,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: MapView.routeName,
-      getPages: [GetPage(name: MapView.routeName, page: () => const MapView())],
+      initialRoute: LoginView.routeName,
+      getPages: [
+        GetPage(name: MapView.routeName, page: () => const MapView()),
+        GetPage(
+            name: LoginView.routeName,
+            page: () => const LoginView(),
+            binding: BindingsBuilder(() {
+              Get.put(LoginController());
+            }))
+      ],
       initialBinding: BindingsBuilder(() {}),
     );
   }

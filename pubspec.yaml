@@ -39,6 +39,7 @@ dependencies:
   freezed_annotation:
   json_annotation:
   font_awesome_flutter:
+  get_storage:
 
 dev_dependencies:
   flutter_test:
